@@ -34,12 +34,11 @@ Business Directory Plugin for WordPress ≤ 6.4.21
 | **Vector**       | `CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N`            |
 | **Assigner**     | Wordfence (CNA) — `d8ec7d25-1574-416c-b5fd-3a71b1cc09d2`   |
 | **Disclosed**    | February 18, 2026                                           |
-| **Public PoC**   | This repository                                             |
 
 The Business Directory Plugin is a widely used WordPress plugin for building
 listing directories with payment support. A flaw in its ORM query builder
-allows an unauthenticated attacker to inject arbitrary SQL via the `payment`
-query parameter, enabling full database read access.
+allows an unauthenticated attacker to perform time-based blind SQL injection via the `payment` query parameter, 
+enabling inference of database contents.
 
 ---
 
@@ -264,7 +263,7 @@ All commands run from the lab root directory on your Kali host.
 Use `http://localhost:8080` (host → Docker port mapping).
 The `payment_key` must match a real row in `wp_wpbdp_payments`.
 
-### Detect — confirm the injection exists
+### Detect: confirm the injection exists
 
 ```bash
 python3 poc/poc.py --target http://localhost:8080 --page-id 4 --payment-key seed-pay-001 --detect
