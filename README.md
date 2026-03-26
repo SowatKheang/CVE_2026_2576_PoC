@@ -229,8 +229,6 @@ Wait until you see:
 ### Step 4: Confirm the vulnerable plugin version
 
 ```bash
-### Step 4 — Confirm the vulnerable plugin version
-```bash
 docker exec lab_wordpress bash -c \
   "grep 'Version:' /var/www/html/wp-content/plugins/business-directory-plugin/business-directory-plugin.php \
   | head -1"
